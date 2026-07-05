@@ -16,16 +16,103 @@
   overflow: hidden;
 }
 
+/* ---- Hero banner: layered gradient + dot texture + glow blob ---- */
 .hero-gradient {
+  position: relative;
+  isolation: isolate;
   background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
 }
+.hero-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.18) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+.hero-gradient::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  width: 280px;
+  height: 280px;
+  right: -60px;
+  bottom: -100px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, transparent 70%);
+  filter: blur(4px);
+}
 
+/* ---- Voucher card: ticket perforation + lift-on-hover ---- */
 .voucher-banner {
   background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0 10px, transparent 10px 20px);
 }
 
+.voucher-card {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+}
+.voucher-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 32px -12px rgba(79, 70, 229, 0.25);
+}
+
+.ticket-divider {
+  position: relative;
+  height: 1px;
+  margin: 0 16px;
+  border-top: 2px dashed rgb(226 232 240); /* slate-200 */
+}
+.ticket-divider::before,
+.ticket-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: #f8fafc; /* matches page background, reads as a punched hole */
+  transform: translateY(-50%);
+}
+.ticket-divider::before { left: -24px; }
+.ticket-divider::after { right: -24px; }
+
+/* ---- Hot badge: sweeping shine to draw the eye ---- */
+.badge-hot {
+  position: relative;
+  overflow: hidden;
+}
+.badge-hot::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+  animation: hot-shine 2.4s ease-in-out infinite;
+}
+@keyframes hot-shine {
+  0% { left: -60%; }
+  55% { left: 130%; }
+  100% { left: 130%; }
+}
+
+/* ---- Modals: fade backdrop + spring-pop panel ---- */
 .modal-backdrop {
   background: rgba(15, 23, 42, 0.6);
+}
+.modal-root {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.modal-root.modal-open {
+  opacity: 1;
+}
+.modal-panel {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: scale(0.95) translateY(16px);
+}
+.modal-root.modal-open .modal-panel {
+  transform: scale(1) translateY(0);
 }
 
 @keyframes toast-in {
@@ -43,17 +130,3 @@
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-.ticket-notch::before,
-.ticket-notch::after {
-  content: '';
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  background: #f8fafc;
-  border-radius: 9999px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.ticket-notch::before { left: -8px; }
-.ticket-notch::after { right: -8px; }

@@ -67,17 +67,19 @@ const App = {
     const modal = document.getElementById(id);
     modal.querySelector('[data-modal-body]').innerHTML = html;
     modal.classList.remove('hidden');
-    requestAnimationFrame(() => modal.classList.remove('opacity-0'));
+    requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('modal-open')));
     document.body.classList.add('overflow-hidden');
   },
   closeModal(id) {
     const modal = document.getElementById(id);
-    modal.classList.add('hidden');
+    modal.classList.remove('modal-open');
     document.body.classList.remove('overflow-hidden');
+    setTimeout(() => modal.classList.add('hidden'), 200);
   },
   closeAllModals() {
-    document.querySelectorAll('.modal-root').forEach((m) => m.classList.add('hidden'));
+    document.querySelectorAll('.modal-root').forEach((m) => m.classList.remove('modal-open'));
     document.body.classList.remove('overflow-hidden');
+    setTimeout(() => document.querySelectorAll('.modal-root').forEach((m) => m.classList.add('hidden')), 200);
   },
 
   toast(message, type = 'success') {

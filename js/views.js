@@ -34,13 +34,14 @@ function voucherCardHtml(v) {
   const claimed = State.isClaimed(v.id);
   return `
     <div data-action="open-voucher" data-id="${v.id}"
-      class="cursor-pointer bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all">
+      class="voucher-card cursor-pointer bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
       <div class="voucher-banner relative h-24 bg-${m.color}-500 flex items-center justify-between px-4">
-        ${v.hot ? '<span class="absolute top-2 left-2 bg-amber-400 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full">HOT</span>' : ''}
+        ${v.hot ? '<span class="badge-hot absolute top-2 left-2 bg-amber-400 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full">HOT</span>' : ''}
         <i class="fa-solid ${m.icon} text-white/90 text-2xl"></i>
         <span class="text-white font-extrabold text-xl drop-shadow">${v.discount}</span>
       </div>
-      <div class="p-4">
+      <div class="ticket-divider"></div>
+      <div class="p-4 pt-3">
         <p class="text-xs font-medium text-${m.color}-600 mb-1">${m.name}</p>
         <h3 class="font-semibold text-slate-800 line-clamp-2 mb-2 min-h-[2.5rem]">${v.title}</h3>
         <div class="flex items-center justify-between text-xs text-slate-400">
@@ -222,11 +223,12 @@ function voucherDetailModalContent(v) {
   const claimed = State.isClaimed(v.id);
   return `
     <div class="voucher-banner relative h-32 bg-${m.color}-500 rounded-t-2xl flex items-center justify-between px-6">
-      ${v.hot ? '<span class="absolute top-3 left-3 bg-amber-400 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full">HOT</span>' : ''}
+      ${v.hot ? '<span class="badge-hot absolute top-3 left-3 bg-amber-400 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full">HOT</span>' : ''}
       <i class="fa-solid ${m.icon} text-white/90 text-3xl"></i>
       <span class="text-white font-extrabold text-3xl drop-shadow">${v.discount}</span>
     </div>
-    <div class="p-6">
+    <div class="ticket-divider"></div>
+    <div class="p-6 pt-4">
       <p class="text-sm font-medium text-${m.color}-600 mb-1">${m.name} · ${v.category}</p>
       <h2 class="text-lg font-bold text-slate-800 mb-3">${v.title}</h2>
       <p class="text-sm text-slate-500 mb-4">${v.description}</p>
