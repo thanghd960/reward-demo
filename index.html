@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>eVoucher Demo</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <header class="bg-white/90 backdrop-blur border-b border-slate-100 sticky top-0 z-30">
+    <nav class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="#home" class="flex items-center gap-2 font-extrabold text-indigo-600 text-lg">
+          <i class="fa-solid fa-ticket"></i> eVoucher
+        </a>
+        <div class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#home" data-nav-link="home" class="hover:text-indigo-600 transition-colors">Trang chủ</a>
+          <a href="#vouchers" data-nav-link="vouchers" class="hover:text-indigo-600 transition-colors">Voucher</a>
+          <a href="#wallet" data-nav-link="wallet" class="hover:text-indigo-600 transition-colors">Ví của tôi</a>
+          <a href="#history" data-nav-link="history" class="hover:text-indigo-600 transition-colors">Lịch sử Booking</a>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div id="user-box"></div>
+        <button data-action="toggle-mobile-menu" class="md:hidden text-slate-500 text-xl">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 px-4 py-3 flex flex-col gap-3 text-sm">
+      <a href="#home" data-nav-link="home">Trang chủ</a>
+      <a href="#vouchers" data-nav-link="vouchers">Voucher</a>
+      <a href="#wallet" data-nav-link="wallet">Ví của tôi</a>
+      <a href="#history" data-nav-link="history">Lịch sử Booking</a>
+    </div>
+  </header>
+
+  <!-- Page content -->
+  <main id="app" class="flex-1"></main>
+
+  <!-- Footer -->
+  <footer class="text-center text-xs text-slate-400 py-6 border-t border-slate-100 bg-white">
+    eVoucher Demo &middot; Dữ liệu minh hoạ, không kết nối backend thật.
+  </footer>
+
+  <!-- Modal: Voucher Detail -->
+  <div id="modal-voucher-detail" class="modal-root hidden fixed inset-0 z-40 modal-backdrop flex items-end sm:items-center justify-center p-0 sm:p-4" data-close-on-backdrop>
+    <div class="bg-white rounded-t-2xl sm:rounded-2xl w-full sm:max-w-md max-h-[90vh] overflow-y-auto relative">
+      <button data-action="close-modal" data-modal="modal-voucher-detail" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-black/20 text-white flex items-center justify-center hover:bg-black/30">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div data-modal-body></div>
+    </div>
+  </div>
+
+  <!-- Modal: Booking -->
+  <div id="modal-booking" class="modal-root hidden fixed inset-0 z-40 modal-backdrop flex items-end sm:items-center justify-center p-0 sm:p-4" data-close-on-backdrop>
+    <div class="bg-white rounded-t-2xl sm:rounded-2xl w-full sm:max-w-md max-h-[90vh] overflow-y-auto relative">
+      <button data-action="close-modal" data-modal="modal-booking" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-slate-200">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div data-modal-body></div>
+    </div>
+  </div>
+
+  <!-- Modal: Login -->
+  <div id="modal-login" class="modal-root hidden fixed inset-0 z-50 modal-backdrop flex items-end sm:items-center justify-center p-0 sm:p-4" data-close-on-backdrop>
+    <div class="bg-white rounded-t-2xl sm:rounded-2xl w-full sm:max-w-sm max-h-[90vh] overflow-y-auto relative">
+      <button data-action="close-modal" data-modal="modal-login" class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-slate-200">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div data-modal-body></div>
+    </div>
+  </div>
+
+  <!-- Toasts -->
+  <div id="toast-container" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-[60] flex flex-col gap-2 items-center w-full px-4 pointer-events-none"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/views.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

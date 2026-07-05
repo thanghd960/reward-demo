@@ -1,0 +1,59 @@
+/* Small custom helpers that Tailwind utility classes don't cover directly */
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
+}
+
+.voucher-banner {
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0 10px, transparent 10px 20px);
+}
+
+.modal-backdrop {
+  background: rgba(15, 23, 42, 0.6);
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.toast-item {
+  animation: toast-in 0.2s ease-out;
+}
+
+.page-enter {
+  animation: page-fade 0.15s ease-out;
+}
+@keyframes page-fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ticket-notch::before,
+.ticket-notch::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #f8fafc;
+  border-radius: 9999px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ticket-notch::before { left: -8px; }
+.ticket-notch::after { right: -8px; }
